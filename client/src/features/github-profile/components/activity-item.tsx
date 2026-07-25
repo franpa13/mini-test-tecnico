@@ -53,7 +53,8 @@ export function ActivityItem({ activity, showRepoLink = true }: ActivityItemProp
             </>
           )}
         </p>
-        <time dateTime={activity.createdAt} className="text-xs text-muted-foreground">
+        {/* "hace X" recalcula con Date.now() al hidratar: puede diferir en 1s del render del server */}
+        <time dateTime={activity.createdAt} className="text-xs text-muted-foreground" suppressHydrationWarning>
           {formatRelativeTime(activity.createdAt)}
         </time>
       </div>

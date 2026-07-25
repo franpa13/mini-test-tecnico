@@ -129,8 +129,8 @@ Los tres devuelven `404` con mensaje propio si el username no existe en GitHub, 
 ```
 client/src/
 ├── app/
-│   ├── layout.tsx                          # metadata + fuentes, arma el <html>/<body>
-│   └── page.tsx                            # Server Component: fetch inicial (perfil de DEFAULT_USERNAME) + monta el feature
+│   ├── layout.tsx                          # metadata + fuentes, arma el <html>/<body>, monta <Footer/>
+│   └── page.tsx                            # Server Component: fetch inicial (perfil de DEFAULT_USERNAME) + monta el feature. `dynamic = 'force-dynamic'` + try/catch con <ErrorState/> si el backend no responde
 ├── features/
 │   └── github-profile/
 │       ├── components/
@@ -150,10 +150,11 @@ client/src/
 │       └── index.ts                        # barrel: hoy expone solo <ProfileExplorer>
 └── shared/
     ├── components/
-    │   ├── ui/                             # primitivas de shadcn (Card, Button, Input, Accordion, Separator) — librería de diseño de base, sin lógica de dominio
+    │   ├── ui/                             # primitivas de shadcn (Card, Button, Input, Accordion) — librería de diseño de base, sin lógica de dominio
     │   ├── section-title.tsx               # título de sección con ícono (prop `icon: LucideIcon`) — lo usan repo-list y activity-list, por eso es shared y no vive en un solo componente
     │   ├── spinner.tsx                     # loading genérico
-    │   └── error-state.tsx                 # error genérico
+    │   ├── error-state.tsx                 # error genérico
+    │   └── footer.tsx                      # "Hecho por Francisco Paredes" con link a GitHub — montado en layout.tsx, aparece en toda la app
     ├── lib/
     │   ├── api.ts                          # apiFetch: base URL desde env + desenvuelve el envelope {success,data,message} del backend
     │   ├── format-relative-time.ts         # "hace 3 horas" (Intl.RelativeTimeFormat) — lo usa activity-item

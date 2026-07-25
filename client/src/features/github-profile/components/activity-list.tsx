@@ -64,7 +64,8 @@ export function ActivityList({ activity }: ActivityListProps) {
                       <span className="rounded-full bg-muted px-2 py-0.5">
                         {group.items.length} {group.items.length === 1 ? "evento" : "eventos"}
                       </span>
-                      {formatRelativeTime(group.items[0].createdAt)}
+                      {/* "hace X" recalcula con Date.now() al hidratar: puede diferir en 1s del render del server */}
+                      <span suppressHydrationWarning>{formatRelativeTime(group.items[0].createdAt)}</span>
                     </span>
                   </span>
                 </AccordionTrigger>
