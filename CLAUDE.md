@@ -220,7 +220,7 @@ Cuando te pida agregar algo, esperá que te diga a qué feature/módulo pertenec
 
 ## Estado actual (a mantener actualizado)
 
-Backend con el módulo `user` implementado y probado (`GET /user/:username` y `GET /user/:username/repos`, envelope de respuesta uniforme, entorno configurado, puertos 4000/4001). Frontend con el feature `github-profile` implementado y probado visualmente (Playwright/`chromium-cli`): banner de búsqueda (github.png/git.png + input) y, debajo, perfil + repos — carga inicial server-side con el perfil de `franpa13` y búsqueda de otros usuarios client-side sin recargar. Falta: el deploy de ambas partes y responder el email de entrega.
+Backend y frontend completos e implementados (ver "Endpoints implementados" y la sección de arquitectura frontend arriba), **desplegados**: backend en Railway, frontend en Vercel (URLs en el README, sección "Deploy"). `app/page.tsx` fuerza `dynamic = 'force-dynamic'` (los datos son en vivo, no tiene sentido cachearlos en build time) y tiene try/catch alrededor del fetch inicial para no romper toda la página si el backend no responde. Falta: responder el email de entrega con los links.
 
 ## Cómo trabajar en este repo
 

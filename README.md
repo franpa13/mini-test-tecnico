@@ -134,10 +134,23 @@ pnpm dev
 | `GET` | `/user/:username/repos` | Repos públicos del usuario, ordenados por actualización reciente (lenguaje, stars, forks, watchers, license, tamaño) |
 | `GET` | `/user/:username/activity` | Actividad pública reciente (push, ramas, issues, PRs, releases) |
 
+## Deploy
+
+- **Backend:** Railway. URL: `https://mini-test-tecnico-production.up.railway.app`.
+- **Frontend:** Vercel. URL: `https://mini-test-tecnico.vercel.app`.
+
+Al desplegar, ojo con dos variables de entorno que **no** viajan solas desde el `.env.example` — hay que setearlas a mano en el dashboard de cada plataforma:
+
+- **En Vercel** (Settings → Environment Variables): `NEXT_PUBLIC_API_URL` = la URL pública del backend (Railway). Como es una var `NEXT_PUBLIC_*`, Next.js la incluye en el build — si se agrega o cambia, hay que **redeployar** para que tome efecto (no alcanza con guardarla).
+- **En Railway** (Variables): `CORS_ORIGIN` = la URL pública del frontend (Vercel), no `http://localhost:4001`. Si queda apuntando a localhost, el navegador bloquea por CORS las búsquedas que se hacen client-side (no la carga inicial, que es server-to-server y no pasa por CORS).
+
+Si alguna de las dos queda mal configurada, la home tira `Uncaught Error: An error occurred in the Server Components render` en producción (Next.js oculta el mensaje real). `app/page.tsx` tiene un try/catch alrededor del fetch inicial que muestra un `ErrorState` prolijo en vez de romper la página — pero la causa de fondo sigue siendo la variable mal seteada, no la falta de manejo de errores.
+
 ## Próximos pasos
 
 - [x] Implementar `GET /user/:username` en `server` (llamada a la API pública de GitHub).
 - [x] Implementar `GET /user/:username/repos` como endpoint adicional.
 - [x] Implementar la UI en `client` que consuma esos endpoints.
-- [ ] Desplegar backend y frontend.
+- [x] Desplegar backend (Railway) y frontend (Vercel).
+- [ ] Responder el email con los links de repo y deploy.
 - [ ] Responder el email con los links de repo y deploy.
