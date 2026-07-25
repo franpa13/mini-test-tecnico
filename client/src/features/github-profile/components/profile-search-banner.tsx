@@ -6,6 +6,7 @@ import { Search } from "lucide-react";
 
 import { Input } from "@/shared/components/ui/input";
 import { Button } from "@/shared/components/ui/button";
+import { ThemeToggle } from "@/shared/components/theme-toggle";
 
 interface ProfileSearchBannerProps {
   onSearch: (username: string) => void;
@@ -51,6 +52,7 @@ export function ProfileSearchBanner({ onSearch, isLoading }: ProfileSearchBanner
           <Button type="submit" size="icon" aria-label="Buscar" disabled={isLoading || !value.trim()}>
             <Search />
           </Button>
+          <ThemeToggle />
         </form>
       </div>
 
