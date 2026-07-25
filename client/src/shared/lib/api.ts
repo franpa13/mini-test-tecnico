@@ -1,6 +1,8 @@
 import { ApiError } from "@/shared/types/api-error";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:4000";
+// Sin barra final: evita URLs con doble "/" si la env var la trae incluida
+// (ej: "https://api.example.com/" en vez de "https://api.example.com").
+const API_URL = (process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:4000").replace(/\/+$/, "");
 
 interface ApiEnvelope<T> {
   success: boolean;
