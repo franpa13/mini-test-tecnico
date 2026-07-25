@@ -5,6 +5,10 @@ import { ProfileExplorer } from "@/features/github-profile";
 
 const DEFAULT_USERNAME = "franpa13";
 
+// El perfil se pide en cada visita (no en build time): son datos "en vivo"
+// de GitHub, no algo que tenga sentido dejar congelado en un build estático.
+export const dynamic = "force-dynamic";
+
 export default async function Home() {
   const [profile, repos, activity] = await Promise.all([
     getGithubProfile(DEFAULT_USERNAME),
